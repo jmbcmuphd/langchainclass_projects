@@ -1,5 +1,8 @@
 from langchain.prompts.prompt import PromptTemplate
 from langchain_openai import ChatOpenAI
+from langchain_ollama import ChatOllama
+from langchain.chains import LLMChain
+from langchain_core.output_parsers import StrOutputParser
 from dotenv import load_dotenv
 import os
 
@@ -15,7 +18,7 @@ if __name__ == "__main__":
     """
 
     information = """
-        Elon Reeve Musk FRS (/ˈiːlɒn/; born June 28, 1971) is a businessman and investor known for his key roles in 
+        Elon Reeve Musk FRS (born June 28, 1971) is a businessman and investor known for his key roles in 
         space company SpaceX and automotive company Tesla, Inc. Other involvements include ownership of X Corp., 
         the company that operates the social media platform X (formerly known as Twitter), and his role in the 
         founding of The Boring Company, xAI, Neuralink and OpenAI. He is one of the wealthiest people in the world; 
@@ -55,11 +58,11 @@ if __name__ == "__main__":
         input_variables=["information"], template=summary_template
     )
 
-    llm = ChatOpenAI(temperature=0, model_name="gpt-3.5-turbo")
+    # llm = ChatOpenAI(temperature=0, model_name="gpt-3.5-turbo")
+    llm = ChatOllama(model="llama3")
 
-    chain = (
-        summary_prompt_template | llm
-    )  # LLMChain(llm=llm, prompt=summary_prompt_template)
+    chain = summary_prompt_template | llm | StrOutputParser()
+    # chain = LLMChain(llm=llm, prompt=summary_prompt_template)
     res = chain.invoke(input={"information": information})
 
     print(res)
