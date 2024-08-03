@@ -12,7 +12,7 @@ if __name__ == "__main__":
     print("Hello LangChain")
 
     summary_template = """
-        given the information about a person from whom I want you to create:
+        given the information {information} about a person from whom I want you to create:
         1. a short summary
         2. two interesting facts about them
     """
