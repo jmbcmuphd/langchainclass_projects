@@ -12,7 +12,7 @@ if __name__ == "__main__":
     print("Hello LangChain")
 
     summary_template = """
-        given the information about a person from I want you to create:
+        given the information about a person from whom I want you to create:
         1. a short summary
         2. two interesting facts about them
     """
@@ -59,7 +59,7 @@ if __name__ == "__main__":
     )
 
     # llm = ChatOpenAI(temperature=0, model_name="gpt-3.5-turbo")
-    llm = ChatOllama(model="llama3")
+    llm = ChatOllama(model="llama3.1")
 
     chain = summary_prompt_template | llm | StrOutputParser()
     # chain = LLMChain(llm=llm, prompt=summary_prompt_template)
