@@ -8,6 +8,7 @@ from langchain.prompts import PromptTemplate
 from langchain.schema import AgentAction, AgentFinish
 from langchain.tools import Tool, tool
 from langchain.tools.render import render_text_description
+from callbacks import AgentCallbackHandler
 
 load_dotenv()
 
@@ -60,7 +61,7 @@ if __name__ == "__main__":
         tool_names=", ".join([t.name for t in tools]),
     )
 
-    llm = ChatOpenAI(model="gpt-4o-mini", temperature=0, stop=["\nObservation"])
+    llm = ChatOpenAI(model="gpt-4o-mini", temperature=0, stop=["\nObservation"], callbacks=[AgentCallbackHandler()])
     intermediate_steps = []
     agent = (
         {
