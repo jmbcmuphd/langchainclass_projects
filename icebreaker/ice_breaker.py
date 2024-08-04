@@ -11,7 +11,7 @@ from typing import Tuple
 
 def ice_break_with(name: str) -> Tuple[Summary, str]:
     linkedin_username = linkedin_lookup_agent(name)
-    linkedin_data = scrape_linkedin_profile(linkedin_profile_url=linkedin_username)
+    linkedin_data = scrape_linkedin_profile(linkedin_profile_url=linkedin_username, mock=True)
 
     summary_template = """
             given the information about a person from LinkedIn {information},
