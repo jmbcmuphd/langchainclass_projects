@@ -10,7 +10,7 @@ load_dotenv()
 
 if __name__ == "__main__":
     print("Ingesting...")
-    test_mediumblog_path = str(os.environ.get('TEST_MEDIUMBLOG_PATH'))
+    test_mediumblog_path = str(os.environ.get("TEST_MEDIUMBLOG_PATH"))
     print(test_mediumblog_path)
     loader = TextLoader(test_mediumblog_path, encoding="utf8")
     document = loader.load()
@@ -23,7 +23,7 @@ if __name__ == "__main__":
     embeddings = OpenAIEmbeddings(openai_api_key=os.environ.get("OPENAI_API_KEY"))
 
     print("Ingesting...")
-    PineconeVectorStore.from_documents(texts, embeddings, index_name=os.environ['INDEX_NAME'])
+    PineconeVectorStore.from_documents(
+        texts, embeddings, index_name=os.environ["INDEX_NAME"]
+    )
     print("finished...")
-
-
