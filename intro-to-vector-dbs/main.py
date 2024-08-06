@@ -17,11 +17,21 @@ if __name__ == "__main__":
 
     query = "what is Pinecone in machine learning?"
     chain = PromptTemplate.from_template(template=query) | llm
-    result = chain.invoke(input={})
-    print(result.content)
+    # result = chain.invoke(input={})
+    # print(result.content)
 
     vectorstore = PineconeVectorStore(
         index_name=os.environ["INDEX_NAME"], embedding=embeddings
     )
 
     retrieval_qa_chat_prompt = hub.pull("langchain-ai/retrieval-qa-chat")
+    combine_docs_chain = create_stuff_documents_chain(llm, retrieval_qa_chat_prompt)
+    retrieval_chain = create_retrieval_chain(
+        retriever=vectorstore.as_retriever(), combine_docs_chain=combine_docs_chain
+    )
+
+    result = retrieval_chain.invoke(input={"input": query})
+
+    print(result)
+
+
