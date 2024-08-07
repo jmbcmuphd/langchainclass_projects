@@ -6,9 +6,10 @@ __pycache__/
 # C extensions
 *.so
 
-# HTML files
+# HTML and PDF files
 *.html
 *.htm
+*.pdf
 
 # Distribution / packaging
 .Python
