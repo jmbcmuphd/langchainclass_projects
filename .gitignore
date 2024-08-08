@@ -7,6 +7,7 @@ __pycache__/
 *.so
 
 # HTML and PDF files
+langchain-docs/
 *.html
 *.htm
 *.pdf
