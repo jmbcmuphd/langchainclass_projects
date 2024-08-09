@@ -21,6 +21,7 @@ tqdm = "*"
 langchain-pinecone = "*"
 langchain-openai = "*"
 langchain-community = "*"
+langchainhub = "*"
 
 [dev-packages]
 

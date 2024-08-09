@@ -1,3 +1,4 @@
+import os
 from dotenv import load_dotenv
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.document_loaders import ReadTheDocsLoader
@@ -10,7 +11,9 @@ embeddings = OpenAIEmbeddings(model="text-embedding-3-small")
 
 
 def ingest_docs():
-    loader = ReadTheDocsLoader("langchain-docs/langchain.readthedocs.io/en/latest", encoding="utf8")
+    loader = ReadTheDocsLoader(
+        "langchain-docs/langchain.readthedocs.io/en/latest", encoding="utf8"
+    )
 
     raw_documents = loader.load()
     print(f"loaded {len(raw_documents)} documents")
@@ -24,9 +27,8 @@ def ingest_docs():
         doc.metadata.update({"source": new_url})
 
     print(f"Going to add {len(documents)} to Pinecone")
-    PineconeVectorStore.from_documents(
-        documents, embeddings, index_name="langchain-doc-index"
-    )
+    index_name = os.environ["INDEX_NAME"]
+    PineconeVectorStore.from_documents(documents, embeddings, index_name=index_name)
     print("**** Loading to vectorstore done *****")
 
 
