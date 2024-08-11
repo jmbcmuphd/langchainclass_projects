@@ -14,6 +14,7 @@ langchain-docs/
 
 # Directories storing images, CSV files, and other data
 qrcodes/
+*.csv
 
 # Distribution / packaging
 .Python
