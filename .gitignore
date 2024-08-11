@@ -12,6 +12,9 @@ langchain-docs/
 *.htm
 *.pdf
 
+# Directories storing images, CSV files, and other data
+qrcodes/
+
 # Distribution / packaging
 .Python
 build/
