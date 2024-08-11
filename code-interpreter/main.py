@@ -9,7 +9,7 @@ def main():
     print("Start...")
 
     csv_agent = create_csv_agent(
-        llm=ChatOpenAI(temperature=0, model="gpt-4"),
+        llm=ChatOpenAI(temperature=0, model="gpt-4o-mini"),
         path="episode_info.csv",
         verbose=True,
     )
