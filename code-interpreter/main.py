@@ -78,8 +78,9 @@ def main():
     print(
         grand_agent_executor.invoke(
             {
-                "input": """Generate and save in current working directory 15 qrcodes that point to 
-                `www.udemy.com/course/langchain`""",
+                "input": """Generate and save in current working directory a file in markdown format using the .md extention
+                that summarizes the website 
+                `https://www.saab.com/markets/united-states/skapa-by-saab`""",
             }
         )
     )
