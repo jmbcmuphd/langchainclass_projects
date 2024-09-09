@@ -40,18 +40,23 @@ def ingest_docs2() -> None:
         "https://www.saab.com/markets/united-states/skapa-by-saab/",
     ]
 
+    text_splitter = RecursiveCharacterTextSplitter(chunk_size=200, chunk_overlap=20)
+    crawl_params = {
+        'crawlerOptions': {
+            'includes': [], # leave empty for all pages
+            'limit': 20,
+        }
+    }
+
     for url in langchain_documents_base_urls:
         print(f"FireCrawling {url=}")
         loader = FireCrawlLoader(
             url=url,
             mode="crawl",
-            params={
-                "crawlerOptions": {"limit": 10},
-                "pageOptions": {"onlyMainContent": True},
-                "wait_until_done": True,
-            },
+            params={},
         )
-        docs = loader.load()
+        raw_documents = loader.load()
+        docs = text_splitter.split_documents(raw_documents)
 
         print(f"Going to add {len(docs) }documents to Pinecone")
         PineconeVectorStore.from_documents(docs, embeddings, index_name="saab-usa-skapa-index")

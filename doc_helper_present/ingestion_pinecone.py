@@ -8,8 +8,12 @@ from langchain_openai import OpenAIEmbeddings
 load_dotenv()
 
 urls = [
-    "https://www.saab.com/markets/united-states/",
     "https://www.saab.com/markets/united-states/skapa-by-saab/",
+    "https://www.saab.com/markets/united-states/skapa-by-saab#we-are-skapa---where-dreamers-and-doers-unite",
+    "https://www.saab.com/markets/united-states/skapa-by-saab#saab-launches-new-initiative-to-shape-the-future-of-defense-and-security",
+    "https://www.saab.com/markets/united-states/skapa-by-saab#our-team",
+    "https://www.saab.com/markets/united-states/skapa-by-saab#contact-skapa",
+    "https://www.saab.com/markets/united-states/",
     "https://www.saab.com/markets/united-states/about",
     "https://www.saab.com/markets/united-states/about/organization",
     "https://www.saab.com/markets/united-states/about/units",
@@ -25,17 +29,17 @@ urls = [
     "https://www.saab.com/markets/united-states/us-newsroom/news-and-press-releases",
     "https://www.saab.com/markets/united-states/us-newsroom/stories/2023/saabs-autonomy-and-ai-team-energizes-smarter-products",
     "https://www.saab.com/markets/united-states/us-newsroom/news-and-press-releases/2024/saab-launches-new-initiative-to-shape-the-future-of-defense-and-security",
-
 ]
 
 docs = [WebBaseLoader(url).load() for url in urls]
 docs_list = [item for sublist in docs for item in sublist]
 
 text_splitter = RecursiveCharacterTextSplitter.from_tiktoken_encoder(
-    chunk_size=250, chunk_overlap=20
+    chunk_size=200, chunk_overlap=10
 )
 doc_splits = text_splitter.split_documents(docs_list)
-embeddings = OpenAIEmbeddings(openai_api_key=os.environ.get("OPENAI_API_KEY"))
+embeddings = OpenAIEmbeddings(model="text-embedding-3-small", 
+                              openai_api_key=os.environ.get("OPENAI_API_KEY"))
 
 print("Storing documents in PineCone")
 PineconeVectorStore.from_documents(

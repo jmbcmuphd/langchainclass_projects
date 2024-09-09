@@ -23,6 +23,7 @@ langchain-openai = "*"
 langchain-community = "*"
 langchainhub = "*"
 firecrawl-py = "*"
+python-dotenv = "*"
 
 [dev-packages]
 

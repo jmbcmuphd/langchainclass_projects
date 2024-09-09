@@ -7,9 +7,8 @@ from streamlit_chat import message
 
 load_dotenv()
 
-st.title("Langchain Udemy Course - Documentation Helper Bot")
+st.title("Saab USA -- Documentation Helper")
 
-# prompt = st.text_area("Prompt", placeholder="Enter your prompt here...")
 prompt = st.chat_input("Enter your prompt here...")
 
 if (
@@ -39,7 +38,7 @@ if prompt:
             query=prompt, chat_history=st.session_state["chat_history"]
         )
         sources = set(
-            [doc.metadata["sourceURL"] for doc in generated_response["source_documents"]]
+            [doc.metadata["source"] for doc in generated_response["source_documents"]]
         )
 
         formatted_response = (
